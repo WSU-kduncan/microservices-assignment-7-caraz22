@@ -5,11 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wsu.workorderproservice.dto.ServiceResponseDTO;
+import com.wsu.workorderproservice.model.Application;
 import com.wsu.workorderproservice.service.ApplicationService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,11 +29,16 @@ public class ApplicationController {
 
     @GetMapping(value = "{application_id}")
     public ResponseEntity<ServiceResponseDTO> getApplication(@PathVariable Integer application_id) {
-        return new ResponseEntity<>(ServiceResponseDTO.builder().meta(Map.of(MESSAGE, "Appliation retrieved successfully")).data(applicationService.get(application_id)).build(). HttpStatus.OK);
+        return new ResponseEntity<>(ServiceResponseDTO.builder().meta(Map.of(MESSAGE, "Application retrieved successfully")).data(applicationService.get(application_id)).build(). HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<ServiceResponseDTO> addApplication(@RequestBody Application application) {
         return new ResponseEntity<>(ServiceResponseDTO.builder()meta(Map.of(MESSAGE, "Application added successfully")).data(applicationService.add(application)).build(), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "{application_id}")
+    public ResponseEntity<ServiceResponseDTO> updateApplication(@PathVariable Integer application_id, @RequestBody Application application) {
+        return new ResponseEntity<>(ServiceResponseDTO.builder().meta(Map.of(MESSAGE, "Application updated successfully")).data(applicationService.update(application_id, application)).build(), HttpStatus.OK);
     }
 }
