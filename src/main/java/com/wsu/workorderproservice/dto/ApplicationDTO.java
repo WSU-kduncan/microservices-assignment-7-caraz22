@@ -19,11 +19,11 @@ import jakarta.validation.constraints.Size;
 public class ApplicationDTO {
     
     @NotBlank(message = "Application ID cannot be null or blank")
-    private int applicationId;
+    private Integer applicationId;
     @NotBlank(message = "Pet ID cannot be null or blank")
-    private int petId;
+    private Integer petId;
     @NotBlank(message = "Adopter ID cannot be null or blank")
-    private int adopterId;
+    private Integer adopterId;
     @NotBlank(message = "Application date cannot be null or blank")
     private Date appliationDate;
     @NotBlank(message = "Application status cannot be null or blank")
